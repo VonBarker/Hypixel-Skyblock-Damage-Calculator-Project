@@ -6,8 +6,10 @@ import javafx.geometry.Pos;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class DamageCalculator extends Application  {
@@ -29,6 +31,17 @@ public class DamageCalculator extends Application  {
         Spinner critDamageInputSpinner = new Spinner(0, 9999, 0);
         damageInputSpinner.setEditable(true);
 
+        //Ouput Labels
+        Label damageOutputLabel = new Label("Damage:");
+        Label critDamageOutputLabel = new Label("Critical Hit Damage:");
+        
+        //Outputs
+        Label damageOutputValueLabel = new Label("");
+        Label critDamageOutputValueLabel = new Label("");
+
+        //Button
+        Button calculateButton = new Button("Calculate");
+
         GridPane gridPane = new GridPane();
 
         gridPane.setMinSize(400, 150);
@@ -46,6 +59,11 @@ public class DamageCalculator extends Application  {
         gridPane.add(strengthInputSpinner, 1, 1);
         gridPane.add(critDamageInputLabel, 0, 2);
         gridPane.add(critDamageInputSpinner, 1, 2);
+        gridPane.add(calculateButton, 0, 3);
+        gridPane.add(damageOutputLabel, 2, 0);
+        gridPane.add(critDamageOutputLabel, 2, 2);
+        gridPane.add(damageOutputValueLabel, 2, 1);
+        gridPane.add(critDamageOutputValueLabel, 2, 3);
 
         Scene scene = new Scene(gridPane);
 
