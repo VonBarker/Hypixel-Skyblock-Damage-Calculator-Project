@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
@@ -24,12 +25,21 @@ public class DamageCalculator extends Application  {
         Label critDamageInputLabel = new Label("Crit Damage:");
 
         //Inputs
-        Spinner damageInputSpinner = new Spinner(0, 9999, 0);
+        //Damage
+        Spinner<Integer> damageInputSpinner = new Spinner<Integer>();
+        SpinnerValueFactory<Integer> damageInputValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999);
+        damageInputSpinner.setValueFactory(damageInputValueFactory);
         damageInputSpinner.setEditable(true);
-        Spinner strengthInputSpinner = new Spinner(0, 9999, 0);
-        damageInputSpinner.setEditable(true);
-        Spinner critDamageInputSpinner = new Spinner(0, 9999, 0);
-        damageInputSpinner.setEditable(true);
+        //Strength
+        Spinner<Integer> strengthInputSpinner = new Spinner<Integer>();
+        SpinnerValueFactory<Integer> strengthInputValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999);
+        strengthInputSpinner.setValueFactory(strengthInputValueFactory);
+        strengthInputSpinner.setEditable(true);
+        //Crit Damage
+        Spinner<Integer> critDamageInputSpinner = new Spinner<Integer>();
+        SpinnerValueFactory<Integer> critDamageInputValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 9999);
+        critDamageInputSpinner.setValueFactory(critDamageInputValueFactory);
+        critDamageInputSpinner.setEditable(true);
 
         //Ouput Labels
         Label damageOutputLabel = new Label("Damage:");
@@ -41,6 +51,21 @@ public class DamageCalculator extends Application  {
 
         //Button
         Button calculateButton = new Button("Calculate");
+        calculateButton.setOnAction(action -> {
+            //Get Inputs
+            double damage = damageInputSpinner.getValue();
+            double strength = strengthInputSpinner.getValue();
+            double critDamage = critDamageInputSpinner.getValue();
+            
+            //Results
+            double damageOutput = ((damage + 5) * (1 + strength/100));
+            double critDamageOutput = ((damage + 5) * (1 + strength/100)) * (1 + critDamage/100);
+            String damageOutputString = "" + damageOutput;
+            String critDamageOutputString = "" + critDamageOutput;
+            //Display
+            damageOutputValueLabel.setText(damageOutputString);
+            critDamageOutputValueLabel.setText(critDamageOutputString);
+        });
 
         GridPane gridPane = new GridPane();
 
